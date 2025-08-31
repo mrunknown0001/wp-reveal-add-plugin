@@ -1,0 +1,163 @@
+/* WordPress Reveal Ad Styles */
+.reveal-ad {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    z-index: 999999; /* High z-index for WordPress */
+    transform: translateY(-100%);
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.15);
+    cursor: pointer;
+}
+
+.reveal-ad.revealed {
+    transform: translateY(0);
+}
+
+.reveal-ad.hidden {
+    transform: translateY(-100%);
+}
+
+/* Ad content styling */
+.reveal-ad .ad-content {
+    max-width: 1200px;
+    padding: 20px;
+    pointer-events: none; /* Prevent text selection, allow click through */
+}
+
+.reveal-ad .ad-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    font-family: inherit;
+}
+
+.reveal-ad .ad-subtitle {
+    font-size: 16px;
+    margin: 0;
+    opacity: 0.9;
+    font-family: inherit;
+}
+
+/* Close button */
+.reveal-ad .ad-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 50%;
+    transition: background 0.3s ease;
+    pointer-events: auto; /* Allow close button to be clicked */
+    z-index: 1;
+}
+
+.reveal-ad .ad-close:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+.reveal-ad .ad-close:focus {
+    outline: 2px solid rgba(255,255,255,0.5);
+    outline-offset: 2px;
+}
+
+/* WordPress admin bar compatibility */
+body.admin-bar .reveal-ad {
+    top: 32px; /* Account for admin bar */
+}
+
+@media screen and (max-width: 782px) {
+    body.admin-bar .reveal-ad {
+        top: 46px; /* Admin bar height on mobile */
+    }
+}
+
+/* WordPress body offset when ad is shown */
+body.reveal-ad-active {
+    padding-top: 0; /* Will be set by JavaScript */
+    transition: padding-top 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Ensure WordPress elements don't interfere */
+.reveal-ad * {
+    box-sizing: border-box;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .reveal-ad {
+        height: 150px;
+    }
+    
+    .reveal-ad .ad-title {
+        font-size: 20px;
+    }
+    
+    .reveal-ad .ad-subtitle {
+        font-size: 14px;
+    }
+    
+    .reveal-ad .ad-content {
+        padding: 15px;
+    }
+    
+    .reveal-ad .ad-close {
+        top: 8px;
+        right: 12px;
+        font-size: 16px;
+        padding: 4px 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .reveal-ad {
+        height: 120px;
+    }
+    
+    .reveal-ad .ad-title {
+        font-size: 18px;
+    }
+    
+    .reveal-ad .ad-subtitle {
+        font-size: 13px;
+    }
+}
+
+/* Animation for smoother interactions */
+.reveal-ad:hover {
+    transform: translateY(0) scale(1.001);
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+    .reveal-ad {
+        transition: none;
+    }
+    
+    body.reveal-ad-active {
+        transition: none;
+    }
+}
+
+/* Print styles - hide ad when printing */
+@media print {
+    .reveal-ad {
+        display: none !important;
+    }
+    
+    body.reveal-ad-active {
+        padding-top: 0 !important;
+    }
+}
